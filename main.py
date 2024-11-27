@@ -131,16 +131,24 @@ def listDone():
 def listInProgress():
     file_data, file = openFileInRead()
     list_data = file_data.get("tasks")
-    for item in list_data:
-        if item["status"] == "in-progress":
-            print(json.dumps(item, indent=4))
+    if list_data == []:
+        return False
+    else:
+        for item in list_data:
+            if item["status"] == "in-progress":
+                print(json.dumps(item, indent=4))
+        return True
 
 def listTodo():
     file_data, file = openFileInRead()
     list_data = file_data.get("tasks")
-    for item in list_data:
-        if item["status"] == "todo":
-            print(json.dumps(item, indent=4))
+    if list_data == []:
+        return False
+    else:
+        for item in list_data:
+            if item["status"] == "todo":
+                print(json.dumps(item, indent=4))
+        return True
 
 def main():
     createJson()
