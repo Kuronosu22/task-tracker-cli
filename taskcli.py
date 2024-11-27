@@ -28,12 +28,14 @@ def addToJson(data):
                 file_data["tasks"].append(data)
                 file.seek(0)
                 json.dump(file_data, file, indent=4)
+                print(f"Task added with ID: {end + 1}")
             else:
                 data["id"] = missed_id[0]
                 file_data["tasks"].append(data)
                 file.seek(0)
                 file_data["tasks"].sort(key=ig("id"))
                 json.dump(file_data, file, indent=4)
+                print(f"Task added with ID: {missed_id[0]}")
 
 def missing_id(id_list):
     if id_list == []:
@@ -125,6 +127,8 @@ def listDone():
         for item in list_data:
             if item["status"] == "done":
                 print(json.dumps(item, indent=4))
+            else:
+                return False
         return True
     
 
@@ -137,6 +141,8 @@ def listInProgress():
         for item in list_data:
             if item["status"] == "in-progress":
                 print(json.dumps(item, indent=4))
+            else:
+                return False
         return True
 
 def listTodo():
@@ -148,6 +154,8 @@ def listTodo():
         for item in list_data:
             if item["status"] == "todo":
                 print(json.dumps(item, indent=4))
+            else:
+                return False
         return True
 
 def main():
@@ -186,21 +194,21 @@ def main():
             try:
                 if argv[2] == "done":
                     if listDone() == False:
-                        raise EnvironmentError("No tasks")
+                        print("No tasks to list")
                 elif argv[2] == "in-progress":
                     if listInProgress() == False:
-                        raise EnvironmentError("No tasks")
+                        print("No tasks to list")
                 elif argv[2] == "todo":
                     if listTodo() == False:
-                        raise EnvironmentError("No tasks")
+                        print("No tasks to list")
                 else:
                     raise SyntaxError("Argument invalid")
             except IndexError:
                 if listAll() == False:
-                    raise EnvironmentError("No tasks")
+                    print("No tasks to list")
         else:
             raise SyntaxError("Missing arguments")
-    except SyntaxError:
+    except SyntaxError and IndexError:
         raise SyntaxError("Missing arguments")
 
 

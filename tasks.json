@@ -1,3 +1,11 @@
 {
-    "tasks": []
+    "tasks": [
+        {
+            "id": 1,
+            "description": "take a batk",
+            "status": "todo",
+            "createdAt": "Wed Nov 27 12:33:43 2024",
+            "updatedAt": "Wed Nov 27 12:33:43 2024"
+        }
+    ]
 }
